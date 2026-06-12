@@ -142,8 +142,8 @@ translateBtn.innerText =
 try{
 
 const response =
-await fetch(
-"https://libretranslate.de/translate",
+  await fetch(
+"https://translate.argosopentech.com/translate",
 {
 method:"POST",
 
