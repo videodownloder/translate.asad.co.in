@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- === ADVANCED SEO META TAGS === -->
+    <title>LinguaHub Pastel | Hindi to English, English to Hindi & 50+ Languages Translator</title>
+    
+    <!-- Meta Description (Google Search Result me dikhta hai) -->
+    <meta name="description" content="Free online language translator specializing in Asian and global languages. Easily translate Hindi to English, English to Hindi, Chinese, Japanese, Korean, Arabic, and 50+ languages instantly with auto-detection.">
+    
+    <!-- Meta Keywords (Sare high traffic keywords) -->
+    <meta name="keywords" content="hindi to english translation, english to hindi, translate hindi to english, language translator, english to chinese, japanese translator, korean translation, arabic to english, urdu translation, free online translator, 50 languages translator, asian language converter, translate text online, automatic language detector, best free translator website, multi language translation tool">
+    
+    <!-- Robots Control (Google crawler ko index karne ke liye) -->
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="LinguaHub">
+    
+    <!-- Open Graph Tags (Facebook, WhatsApp, Twitter par link share karne par preview banta hai) -->
+    <meta property="og:title" content="LinguaHub Pastel - Free Multi-Language & Asian Focus Translator">
+    <meta property="og:description" content="Instant translation for Hindi to English, English to Hindi, and 50+ worldwide languages. Try the fastest pastel-themed online translator.">
+    <meta property="og:type" content="website">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+        
+        /* Vibrant, Colorful but Light Pastel Gradient Background */
+        body {
+            background: linear-gradient(135deg, #FFE5EC 0%, #FFF0F5 25%, #FEF9E7 60%, #E8F5E9 100%);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Modern Frosted Glass Container */
+        .container {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            width: 100%;
+            max-width: 900px;
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 12px 40px rgba(255, 182, 193, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 700;
+            color: #4A4A4A;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #7A7A7A;
+            font-size: 14px;
+            margin-bottom: 35px;
+        }
+
+        .row {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .text-area-box {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 18px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            transition: transform 0.3s ease;
+        }
+
+        .text-area-box:focus-within {
+            transform: translateY(-2px);
+        }
+
+        select {
+            padding: 12px 15px;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        #from-lang {
+            background-color: #FFF0F5;
+            color: #D81B60;
+        }
+        #from-lang:focus { border-color: #FFB6C1; }
+
+        #to-lang {
+            background-color: #FEF9E7;
+            color: #B7950B;
+        }
+        #to-lang:focus { border-color: #F4D03F; }
+
+        select optgroup {
+            font-weight: bold;
+            color: #333;
+            background: #fff;
+        }
+
+        textarea {
+            width: 100%;
+            height: 200px;
+            padding: 10px 5px;
+            border: none;
+            resize: none;
+            font-size: 16px;
+            color: #4A4A4A;
+            background: transparent;
+            outline: none;
+            line-height: 1.6;
+        }
+
+        button {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(45deg, #FFB6C1, #F4D03F, #AEEEEE);
+            background-size: 200% auto;
+            border: none;
+            color: #4A4A4A;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 14px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 182, 193, 0.4);
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            background-position: right center;
+            box-shadow: 0 6px 20px rgba(244, 208, 63, 0.4);
+            transform: scale(1.01);
+        }
+
+        /* === SEO FOOTER SECTION === */
+        /* Google ranking ke liye visible text hona zaroori hai */
+        .seo-footer {
+            margin-top: 30px;
+            max-width: 900px;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 20px;
+            border-radius: 14px;
+            font-size: 13px;
+            color: #555;
+            line-height: 1.6;
+            text-align: justify;
+        }
+        .seo-footer h2 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .row {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>✨ LinguaHub Pastel</h1>
+    <p class="subtitle">Premium Real-Time Translation Focusing on Asian Languages</p>
+    
+    <div class="row">
+        <div class="text-area-box" style="border-left: 5px solid #FFB6C1;">
+            <select id="from-lang">
+                <option value="auto">Detect Language (Auto)</option>
+            </select>
+            <textarea id="from-text" placeholder="Type or paste your text here..."></textarea>
+        </div>
+
+        <div class="text-area-box" style="border-left: 5px solid #F4D03F;">
+            <select id="to-lang"></select>
+            <textarea id="to-text" placeholder="Translation will appear here..." readonly></textarea>
+        </div>
+    </div>
+
+    <button id="translate-btn">Translate Now</button>
+</div>
+
+<!-- Visible SEO Content for Search Engines -->
+<footer class="seo-footer">
+    <h2>All-in-One Global & Asian Language Translator</h2>
+    <p>Welcome to the ultimate tool for seamless communication. Whether you are looking for an accurate <strong>hindi to english translation</strong>, fast <strong>english to hindi</strong> conversions, or translating other major Asian tongues like Chinese, Japanese, Korean, and Arabic, we have you covered. Our single-page multi-language platform utilizes advanced algorithms to dynamically detect and convert your text into 50+ languages instantly. Perfect for students, travelers, and businesses looking for a beautiful, responsive, and free online translation service.</p>
+</footer>
+
+<script>
+    const languages = {
+        "Top Asian Priorities": {
+            "hi-IN": "Hindi (India)",
+            "zh-CN": "Chinese (Simplified)",
+            "ja-JP": "Japanese (Japan)",
+            "ko-KR": "Korean (South Korea)",
+            "ar-SA": "Arabic",
+            "id-ID": "Indonesian",
+            "ms-MY": "Malay",
+            "bn-IN": "Bengali",
+            "pa-IN": "Punjabi",
+            "ur-PK": "Urdu",
+            "ta-IN": "Tamil",
+            "te-IN": "Telugu",
+            "mr-IN": "Marathi",
+            "gu-IN": "Gujarati",
+            "kn-IN": "Kannada",
+            "ml-IN": "Malayalam",
+            "th-TH": "Thai",
+            "vi-VN": "Vietnamese",
+            "tl-PH": "Tagalog (Philippines)",
+            "my-MM": "Burmese",
+            "km-KH": "Khmer",
+            "lo-LA": "Lao",
+            "ne-NP": "Nepali",
+            "si-LK": "Sinhala",
+            "zh-TW": "Chinese (Traditional)",
+            "fa-IR": "Persian",
+            "tr-TR": "Turkish",
+            "he-IL": "Hebrew",
+            "kk-KZ": "Kazakh",
+            "mn-MN": "Mongolian",
+            "uz-UZ": "Uzbek"
+        },
+        "Global Languages": {
+            "en-GB": "English",
+            "es-ES": "Spanish",
+            "fr-FR": "French",
+            "de-DE": "German",
+            "ru-RU": "Russian",
+            "pt-PT": "Portuguese",
+            "it-IT": "Italian",
+            "nl-NL": "Dutch",
+            "pl-PL": "Polish",
+            "sv-SE": "Swedish",
+            "no-NO": "Norwegian",
+            "fi-FI": "Finnish",
+            "da-DK": "Danish",
+            "cs-CZ": "Czech",
+            "el-GR": "Greek",
+            "ro-RO": "Romanian",
+            "hu-HU": "Hungarian",
+            "uk-UA": "Ukrainian"
+        }
+    };
+
+    const fromLangSelect = document.getElementById('from-lang');
+    const toLangSelect = document.getElementById('to-lang');
+    const fromText = document.getElementById('from-text');
