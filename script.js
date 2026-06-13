@@ -53,332 +53,158 @@ lt:"Lithuanian"
 // Elements
 // ===============================
 
-const sourceLang =
-document.getElementById("sourceLang");
-
-const targetLang =
-document.getElementById("targetLang");
-
-const translateBtn =
-document.getElementById("translateBtn");
-
-const copyBtn =
-document.getElementById("copyBtn");
-
-const downloadBtn =
-document.getElementById("downloadBtn");
-
-const darkModeBtn =
-document.getElementById("darkModeBtn");
-
-const swapBtn =
-document.getElementById("swapBtn");
-
-const inputText =
-document.getElementById("inputText");
-
-const outputText =
-document.getElementById("outputText");
-
-const historyList =
-document.getElementById("historyList");
+const sourceLang = document.getElementById("sourceLang");
+const targetLang = document.getElementById("targetLang");
+const translateBtn = document.getElementById("translateBtn");
+const copyBtn = document.getElementById("copyBtn");
+const downloadBtn = document.getElementById("downloadBtn");
+const darkModeBtn = document.getElementById("darkModeBtn");
+const swapBtn = document.getElementById("swapBtn");
+const inputText = document.getElementById("inputText");
+const outputText = document.getElementById("outputText");
+const historyList = document.getElementById("historyList");
 
 // ===============================
 // Load Languages
 // ===============================
 
 for(const code in languages){
-
-const option1 =
-document.createElement("option");
-
+const option1 = document.createElement("option");
 option1.value = code;
-option1.textContent =
-languages[code];
-
+option1.textContent = languages[code];
 sourceLang.appendChild(option1);
 
 if(code !== "auto"){
-
-const option2 =
-document.createElement("option");
-
+const option2 = document.createElement("option");
 option2.value = code;
-option2.textContent =
-languages[code];
-
+option2.textContent = languages[code];
 targetLang.appendChild(option2);
-
 }
-
 }
 
 targetLang.value = "ur";
 
 // ===============================
-// Translate
+// Translate (MyMemory API - Free)
 // ===============================
 
-translateBtn.addEventListener(
-"click",
-translateText
-);
+translateBtn.addEventListener("click", translateText);
 
 async function translateText(){
 
-const text =
-inputText.value.trim();
+const text = inputText.value.trim();
 
 if(!text){
-
 alert("Enter text first");
 return;
-
 }
 
-translateBtn.innerText =
-"Translating...";
+translateBtn.innerText = "Translating...";
 
 try{
+const source = sourceLang.value === "auto" ? "en" : sourceLang.value;
+const target = targetLang.value;
+const langPair = `${source}|${target}`;
 
-const response =
-  await fetch(
-"https://translate.argosopentech.com/translate",
-{
-method:"POST",
+const response = await fetch(
+`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${langPair}`
+);
 
-headers:{
-"Content-Type":
-"application/json"
-},
+const data = await response.json();
 
-body:JSON.stringify({
-
-q:text,
-
-source:
-sourceLang.value === "auto"
-? "auto"
-: sourceLang.value,
-
-target:
-targetLang.value,
-
-format:"text"
-
-})
+if(data.responseStatus === 200){
+outputText.value = data.responseData.translatedText;
+saveHistory(text, outputText.value);
+}else{
+alert("Translation error. Try again.");
 }
-);
-
-const data =
-await response.json();
-
-outputText.value =
-data.translatedText || "";
-
-saveHistory(
-text,
-outputText.value
-);
 
 }
 catch(error){
-
-alert(
-"Translation service unavailable"
-);
-
+alert("Translation service unavailable");
 console.error(error);
-
 }
 
-translateBtn.innerText =
-"Translate";
-
+translateBtn.innerText = "Translate";
 }
 
 // ===============================
 // Copy
 // ===============================
 
-copyBtn.addEventListener(
-"click",
-() => {
-
-navigator.clipboard.writeText(
-outputText.value
-);
-
+copyBtn.addEventListener("click", () => {
+navigator.clipboard.writeText(outputText.value);
 alert("Copied");
-
-}
-);
+});
 
 // ===============================
 // Download
 // ===============================
 
-downloadBtn.addEventListener(
-"click",
-() => {
-
-const blob =
-new Blob(
-[outputText.value],
-{
-type:"text/plain"
-}
-);
-
-const a =
-document.createElement("a");
-
-a.href =
-URL.createObjectURL(blob);
-
-a.download =
-"translation.txt";
-
+downloadBtn.addEventListener("click", () => {
+const blob = new Blob([outputText.value], { type: "text/plain" });
+const a = document.createElement("a");
+a.href = URL.createObjectURL(blob);
+a.download = "translation.txt";
 a.click();
-
-}
-);
+});
 
 // ===============================
 // Dark Mode
 // ===============================
 
-darkModeBtn.addEventListener(
-"click",
-() => {
+darkModeBtn.addEventListener("click", () => {
+document.body.classList.toggle("dark-mode");
+localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+});
 
-document.body.classList.toggle(
-"dark-mode"
-);
-
-localStorage.setItem(
-"theme",
-document.body.classList.contains(
-"dark-mode"
-)
-? "dark"
-: "light"
-);
-
-}
-);
-
-if(
-localStorage.getItem("theme")
-=== "dark"
-){
-
-document.body.classList.add(
-"dark-mode"
-);
-
+if(localStorage.getItem("theme") === "dark"){
+document.body.classList.add("dark-mode");
 }
 
 // ===============================
 // Swap Languages
 // ===============================
 
-swapBtn.addEventListener(
-"click",
-() => {
+swapBtn.addEventListener("click", () => {
+let temp = sourceLang.value;
+sourceLang.value = targetLang.value;
+targetLang.value = temp;
 
-let temp =
-sourceLang.value;
-
-sourceLang.value =
-targetLang.value;
-
-targetLang.value =
-temp;
-
-let tempText =
-inputText.value;
-
-inputText.value =
-outputText.value;
-
-outputText.value =
-tempText;
-
-}
-);
+let tempText = inputText.value;
+inputText.value = outputText.value;
+outputText.value = tempText;
+});
 
 // ===============================
 // History
 // ===============================
 
-function saveHistory(
-original,
-translated
-){
-
-const history =
-JSON.parse(
-localStorage.getItem(
-"translationHistory"
-)
-) || [];
-
+function saveHistory(original, translated){
+const history = JSON.parse(localStorage.getItem("translationHistory")) || [];
 history.unshift({
-
 original,
 translated,
-date:new Date()
-.toLocaleString()
-
+date: new Date().toLocaleString()
 });
-
-localStorage.setItem(
-"translationHistory",
-JSON.stringify(history)
-);
-
+localStorage.setItem("translationHistory", JSON.stringify(history));
 loadHistory();
-
 }
 
 function loadHistory(){
-
-const history =
-JSON.parse(
-localStorage.getItem(
-"translationHistory"
-)
-) || [];
-
+const history = JSON.parse(localStorage.getItem("translationHistory")) || [];
 historyList.innerHTML = "";
 
-history.slice(0,20).forEach(
-item => {
-
-const div =
-document.createElement("div");
-
-div.className =
-"history-item";
-
+history.slice(0,20).forEach(item => {
+const div = document.createElement("div");
+div.className = "history-item";
 div.innerHTML = `
-<b>Original:</b>
-${item.original}
-<br><br>
-
-<b>Translated:</b>
-${item.translated}
-<br><br>
-
+<b>Original:</b> ${item.original}<br><br>
+<b>Translated:</b> ${item.translated}<br><br>
 <small>${item.date}</small>
 `;
-
 historyList.appendChild(div);
-
-}
-);
-
+});
 }
 
 loadHistory();
