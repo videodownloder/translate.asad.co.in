@@ -123,16 +123,10 @@ const response = await fetch(
 );
 
 const data = await response.json();
-outputText.value = data.translatedText;
 
-const data = await response.json();
+outputText.value = data.translatedText || "";
 
-if(data.responseStatus === 200){
-outputText.value = data.responseData.translatedText;
 saveHistory(text, outputText.value);
-}else{
-alert("Translation error. Try again.");
-}
 
 }
 catch(error){
