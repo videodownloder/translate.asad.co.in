@@ -107,8 +107,23 @@ const target = targetLang.value;
 const langPair = `${source}|${target}`;
 
 const response = await fetch(
-`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${langPair}`
+"https://translateasad.asadansari121149.workers.dev",
+{
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    q: text,
+    source: sourceLang.value === "auto" ? "auto" : sourceLang.value,
+    target: targetLang.value,
+    format: "text"
+  })
+}
 );
+
+const data = await response.json();
+outputText.value = data.translatedText;
 
 const data = await response.json();
 
